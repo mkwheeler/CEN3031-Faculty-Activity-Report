@@ -42,7 +42,7 @@ describe('User Model Unit Tests:', function() {
 	describe('Method Save', function() {
 		it('should begin with no users', function(done) {
 			User.find({}, function(err, users) {
-				users.should.have.length(0);
+				users.should.have.length(0); //can someone explain this to me?
 				done();
 			});
 		});
@@ -73,6 +73,17 @@ describe('User Model Unit Tests:', function() {
 				done;
 		});
 	});
+	
+		it('should be able to show an error when DisplayName does not equal firstName lastName', function(done) {
+			user.firstName = "Gandolf";
+			user.lastName = "theGrey";
+			user.DisplayName = "Aberforth Dumbledore";
+			return user.save(function(err) {
+				should.exist(err);//this part might not be right.
+				done();//just trying to follow the other tests
+			});			
+		});
+	
 
 	after(function(done) {
 		User.remove().exec();
